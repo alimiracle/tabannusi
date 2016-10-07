@@ -6,14 +6,15 @@
 #include <fcntl.h>
 #include <syslog.h>
 #include <unistd.h>
-
-main()
+int main(int argc, char *argv[])
 {
+ openlog(argv[0],LOG_NOWAIT|LOG_PID,LOG_USER);
  pid_t pid;
  pid = fork();
  /* If the pid is less than zero, something went wrong when forking */
  if (pid < 0) 
 {
+ syslog(LOG_NOTICE, "Cant Fork\n");
  exit(EXIT_FAILURE);
  }
  /* If the pid we got back was greater than zero, then the clone was successful and we are the parent. */ 
@@ -38,7 +39,6 @@ umask(0);
 
 /* Now we will tel the log server its ok now */
  /* Open a connection to the syslog server */
- openlog(argv[0],LOG_NOWAIT|LOG_PID,LOG_USER);
  /* Sends a message to the syslog daemon */
  syslog(LOG_NOTICE, "Successfully started daemon\n");
  closelog();
