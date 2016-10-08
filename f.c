@@ -36,6 +36,9 @@ umask(0);
  close(STDIN_FILENO);
  close(STDOUT_FILENO);
  close(STDERR_FILENO);
+    //catch/ignore signals
+    signal(SIGCHLD,SIG_IGN);
+    signal(SIGHUP,SIG_IGN);
 
 /* Now we will tel the log server its ok now */
  /* Open a connection to the syslog server */
