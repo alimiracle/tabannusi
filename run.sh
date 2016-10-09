@@ -1,15 +1,14 @@
-rp="/home/ali/build"
-dir="/home/clara/blade"
-cd $dir
+source config.sh
+cd $repository
 log1=`git log -1 --pretty=%B`
-log2=`cat /tmp/q.txt`
+log2=`cat $temp/q.txt`
     if [ "$log1" = "$log2" ]
 then
 q=1
 else
-echo $log1 >/tmp/q.txt
-cp -R $dir $rp/$log1
-cd $rp/$log1
+echo $log1 >$temp/q.txt
+cp -R $repository $build_path/$log1
+cd $build_path/$log1
 make &>/tmp/q.tmp
-echo "this build log for "$log1|mutt -a /tmp/q.tmp -s "build log" -- blade.vp2020@gmail.com
+echo "this build log for "$log1|mutt -a /tmp/q.tmp -s "build log" -- $email
 fi
