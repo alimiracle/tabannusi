@@ -1,6 +1,6 @@
 # This is Configuration File for fun_app
-email=youremail
+email=yourmail
 build_path="mypath"
-repository="myrp"
+repository="rp"
 temp="/tmp"
 
