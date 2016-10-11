@@ -6,16 +6,18 @@
 #include <fcntl.h>
 #include <syslog.h>
 #include <unistd.h>
+#include <signal.h>
 int main(int argc, char *argv[])
 {
  /* Open a connection to the syslog server */
  openlog(argv[0],LOG_NOWAIT|LOG_PID,LOG_USER);
+        /* Fork off the parent process */       
  pid_t pid;
  pid = fork();
  /* If the pid is less than zero, something went wrong when forking */
  if (pid < 0) 
 {
-/* Now we will tel the  log server hi cant fork*/
+/* Now we will tel the  log server  cant fork*/
  syslog(LOG_NOTICE, "Cant Fork\n");
  exit(EXIT_FAILURE);
  }
@@ -25,25 +27,40 @@ if (pid > 0)
  exit(EXIT_SUCCESS);
  }
  /* If execution reaches this point we are the child */
- /* Now we will Set the umask to zero */ 
-umask(0);
- /* Now we will  create our own process group */
- pid_t sid;
- /* Try to create our own process group */
- sid = setsid();
-/* its seme ok now/*
- /* Now we will Change the current working directory to root */
- chdir("/");
-/* Close all io /*
- close(STDIN_FILENO);
- close(STDOUT_FILENO);
- close(STDERR_FILENO);
+/* Creating a Unique Session ID (SID)*/
+    if (setsid() < 0)
+ syslog(LOG_NOTICE, "I cant Creat a Unique Session ID ");
+        exit(EXIT_FAILURE);
     //catch/ignore signals
     signal(SIGCHLD,SIG_IGN);
     signal(SIGHUP,SIG_IGN);
+
+        /* Fork off the parent process */pid_t pid1;
+ pid1 = fork();
+ /* If the pid1 is less than zero, something went wrong when forking */
+ if (pid1 < 0) 
+{
+/* Now we will tel the  log server  cant fork*/
+ syslog(LOG_NOTICE, "Cant Fork\n");
+ exit(EXIT_FAILURE);
+ }
+ /* If the pid1 we got back was greater than zero, then the clone was successful and we are the parent. */ 
+if (pid1 > 0)
+ {
+ exit(EXIT_SUCCESS);
+ }
+ /* Now we will Set the umask to zero */ 
+umask(0);
+/* its seme ok now*/
+ /* Now we will Change the current working directory to root */
+ chdir("/");
+/* Close all Files */
+ close(STDIN_FILENO);
+ close(STDOUT_FILENO);
+ close(STDERR_FILENO);
 /* Now we will tel the log server its ok now */
- /* Sends a message to the syslog daemon */
  syslog(LOG_NOTICE, "Successfully started daemon\n");
+ /* close a connection to the syslog server */
  closelog();
 /* make new file to save last commit */
 FILE *fp = fopen("scores.dat", "ab+");
@@ -51,6 +68,6 @@ fclose(fp);
 
 while (1)
 {
-system("bash /home/ali/run.sh");
+system("bash /home/clara/fun/run.sh");
 }
 }
