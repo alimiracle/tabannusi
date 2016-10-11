@@ -34,8 +34,8 @@ if (pid > 0)
     //catch/ignore signals
     signal(SIGCHLD,SIG_IGN);
     signal(SIGHUP,SIG_IGN);
-
-        /* Fork off the parent process */pid_t pid1;
+        /* Fork off the parent process */
+pid_t pid1;
  pid1 = fork();
  /* If the pid1 is less than zero, something went wrong when forking */
  if (pid1 < 0) 
