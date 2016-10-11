@@ -68,6 +68,6 @@ fclose(fp);
 
 while (1)
 {
-system("bash /home/clara/fun/run.sh");
+system("bash /bin/run.sh");
 }
 }

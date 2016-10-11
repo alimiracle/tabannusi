@@ -1,15 +1,15 @@
-all: f.c
-	gcc -g -Wall -o f f.c
+all: tabannusi.c
+	gcc -g -Wall -o tabannusi tabannusi.c
 clean: 
-	$(RM) f
+	$(RM) tabannusi
 install:
-	mkdir /etc/f
-	cp f /bin
+	mkdir /etc/tabannusi
+	cp tabannusi /bin
 	cp run.sh /bin
-	cp config.sh /etc/f
-	cp build.sh /etc/f
-	chmod +x /etc/f/config.sh
-	chmod +x /etc/f/build.sh
-	chmod +x /bin/f
+	cp config.sh /etc/tabannusi
+	cp build.sh /etc/tabannusi
+	chmod +x /etc/tabannusi/config.sh
+	chmod +x /etc/tabannusi/build.sh
+	chmod +x /bin/tabannusi
 	chmod +x /bin/run.sh
 .ONESHELL:

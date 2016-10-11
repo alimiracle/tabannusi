@@ -1,4 +1,4 @@
-source config.sh
+source /etc/tabannusi/config.sh
 cd $repository
 log1=`git log -1 --pretty=%B`
 log2=`cat $temp/q.txt`
