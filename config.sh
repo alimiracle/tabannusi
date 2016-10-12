@@ -1,4 +1,4 @@
-# This is Configuration File for fun_app
+# This is the configuration file for tabannusi
 email=yourmail
 build_path="mypath"
 repository="rp"
