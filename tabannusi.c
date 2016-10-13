@@ -29,8 +29,10 @@ if (pid > 0)
  /* If execution reaches this point we are the child */
 /* Creating a Unique Session ID (SID)*/
     if (setsid() < 0)
+{
  syslog(LOG_NOTICE, "I can't create a Unique Session ID ");
         exit(EXIT_FAILURE);
+}
     //catch/ignore signals
     signal(SIGCHLD,SIG_IGN);
     signal(SIGHUP,SIG_IGN);
@@ -63,7 +65,7 @@ umask(0);
  /* close a connection to the syslog server */
  closelog();
 /* make new file to save last commit */
-FILE *fp = fopen("scores.dat", "ab+");
+FILE *fp = fopen("/tmp/q.txt", "ab+");
 fclose(fp);
 
 while (1)
