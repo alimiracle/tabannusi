@@ -7,6 +7,8 @@
 #include <syslog.h>
 #include <unistd.h>
 #include <signal.h>
+
+#include <sys/ioctl.h>
 int main(int argc, char *argv[])
 {
  /* Open a connection to the syslog server */
@@ -27,12 +29,23 @@ if (pid > 0)
  exit(EXIT_SUCCESS);
  }
  /* If execution reaches this point we are the child */
+/* disassociating from the controlling terminal */
+#if HAVE_SETSID /* if your os have SETSID, use it /*
 /* Creating a Unique Session ID (SID)*/
     if (setsid() < 0)
 {
  syslog(LOG_NOTICE, "I can't create a Unique Session ID ");
         exit(EXIT_FAILURE);
 }
+#elif defined(TIOCNOTTY) /* if  the os dont have SETSID use IOCNOTTY*/
+    fd = open("/dev/tty", O_RDWR);
+    if (fd >= 0) {
+        if (ioctl(fd, TIOCNOTTY, NULL) < 0)
+syslog(LOG_NOTICE, "cant disassociate from the terminal");
+        close(fd);
+        exit(EXIT_FAILURE);
+    }
+#endif /* defined(TIOCNOTTY) */
     //catch/ignore signals
     signal(SIGCHLD,SIG_IGN);
     signal(SIGHUP,SIG_IGN);
