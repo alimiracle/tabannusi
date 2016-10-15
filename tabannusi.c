@@ -30,7 +30,7 @@ if (pid > 0)
  }
  /* If execution reaches this point we are the child */
 /* disassociating from the controlling terminal */
-#if HAVE_SETSID /* if your os have SETSID, use it /*
+#if HAVE_SETSID /* if your os have SETSID, use it */
 /* Creating a Unique Session ID (SID)*/
     if (setsid() < 0)
 {
@@ -38,6 +38,7 @@ if (pid > 0)
         exit(EXIT_FAILURE);
 }
 #elif defined(TIOCNOTTY) /* if  the os dont have SETSID use IOCNOTTY*/
+int fd;
     fd = open("/dev/tty", O_RDWR);
     if (fd >= 0) {
         if (ioctl(fd, TIOCNOTTY, NULL) < 0)
@@ -66,7 +67,6 @@ if (pid1 > 0)
  }
  /* Now we will set the umask to zero */ 
 umask(0);
-/* it's the same ok now*/
  /* Now we will Change the current working directory to root */
  chdir("/");
 /* Close all Files */
