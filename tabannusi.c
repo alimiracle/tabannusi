@@ -42,9 +42,11 @@ int fd;
     fd = open("/dev/tty", O_RDWR);
     if (fd >= 0) {
         if (ioctl(fd, TIOCNOTTY, NULL) < 0)
+{
 syslog(LOG_NOTICE, "cant disassociate from the terminal");
+       exit(EXIT_FAILURE);
+}
         close(fd);
-        exit(EXIT_FAILURE);
     }
 #endif /* defined(TIOCNOTTY) */
     //catch/ignore signals
