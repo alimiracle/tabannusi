@@ -7,10 +7,18 @@
 #include <syslog.h>
 #include <unistd.h>
 #include <signal.h>
-
+#include <pthread.h>
 #include <sys/ioctl.h>
+/* function run by Demon */
+void* runcmd (void* unused)
+{
+system("bash /bin/run.sh");
+return NULL; 
+}
+
 int main(int argc, char *argv[])
 {
+pthread_t thread_id;
  /* Open a connection to the syslog server */
  openlog(argv[0],LOG_NOWAIT|LOG_PID,LOG_USER);
         /* Fork off the parent process */       
@@ -85,6 +93,9 @@ fclose(fp);
 
 while (1)
 {
-system("bash /bin/run.sh");
+
+/* run runcmd function in new thread */
+pthread_create (&thread_id, NULL, &runcmd, NULL);
+sleep(10);
 }
 }
