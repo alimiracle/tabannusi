@@ -1,4 +1,8 @@
 list=`ls`
+if echo "$list" | grep -q "Dockerfile"; then
+docker build `pwd`
+exit
+fi
 if echo "$list" | grep -q "Cargo.toml"; then
  cargo build
 exit
