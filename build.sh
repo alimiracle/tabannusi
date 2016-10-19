@@ -1,4 +1,8 @@
 list=`ls`
+if echo "$list" | grep -q "ant.properties"; then
+ant release
+exit
+fi
 if echo "$list" | grep -q "Dockerfile"; then
 docker build `pwd`
 exit
