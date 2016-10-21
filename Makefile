@@ -8,8 +8,10 @@ install:
 	cp run.sh /bin
 	cp config.sh /etc/tabannusi
 	cp build.sh /etc/tabannusi
+cp make.sh /etc/tabannusi
 	chmod +x /etc/tabannusi/config.sh
 	chmod +x /etc/tabannusi/build.sh
+chmod +x /etc/tabannusi/make.sh
 	chmod +x /bin/tabannusi
 	chmod +x /bin/run.sh
 .ONESHELL:

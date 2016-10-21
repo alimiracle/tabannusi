@@ -19,4 +19,4 @@ if echo "$list" | grep -q "configure"; then
 chmod +x configure
 ./configure
 fi
-make
+./etc/tabannusi/make.sh
