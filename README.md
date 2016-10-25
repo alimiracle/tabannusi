@@ -42,3 +42,7 @@ can build this types
 To run tabannusi, type as root
 
     tabannusi
+Price:
+tabannusi free as Price
+With One exception
+If you met me buy me a pizza, ok??
