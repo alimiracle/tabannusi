@@ -172,7 +172,7 @@ umask(0);
 /* make new file to save last commit */
 FILE *fp = fopen("/tmp/q.txt", "ab+");
 fclose(fp);
-write_pid("pid.txt");
+write_pid("/var/run/tabannusi.pid");
 
 while (1)
 {
@@ -182,9 +182,9 @@ pthread_create (&thread_id, NULL, &runcmd, NULL);
 sleep(10);
 }
 }
-int start()
+void start()
 {
-int scann = check_pid("/pid.txt");
+int scann = check_pid("/var/run/tabannusi.pid");
 puts("Starting tabannusi daemon:\n");
 
 if(scann!=0)
@@ -194,19 +194,19 @@ exit(1);
 }
 run();
 }
-int stop()
+void stop()
 {
-pid_t pid=read_pid("/pid.txt");
-int scann = check_pid("/pid.txt");
+pid_t pid=read_pid("/var/run/tabannusi.pid");
+int scann = check_pid("/var/run/tabannusi.pid");
 puts("Stopping tabannusi daemon\n:");
 if(scann==0)
 {
-puts(tabannusi daemon is not running\n");
+puts("tabannusi daemon is not running\n");
 exit(1);
 }
  kill(pid, SIGKILL);
 }
-int restart()
+void restart()
 {
 stop();
 start();
@@ -240,4 +240,6 @@ else if (strcmp(argv[1], "restart") == 0)
   // do something else
 restart();
 }
+
+    return 0;
 }

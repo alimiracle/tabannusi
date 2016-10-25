@@ -12,7 +12,7 @@ remove_char="_"
 log1=${log1//" "/$remove_char}
 cp -R $repository $build_path/$log1
 cd $build_path/$log1
-/etc/tabannusi/build.sh &>/tmp/$log1
-echo "this build log for "$log1_copy|mutt -a /tmp/$log1 -s "build log" -- $email
+/etc/tabannusi/build.sh &>$temp/$log1
+echo "this build log for "$log1_copy|mutt -a $temp/$log1 -s "build log" -- $email
 rm $log1
 fi

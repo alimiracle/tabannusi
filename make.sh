@@ -1,7 +1,7 @@
 source /etc/tabannusi/config.sh
 build()
 {
-if test $cpu_n = 0
+if test $cpu_n = 1
 then
 make
 else
