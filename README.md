@@ -14,6 +14,7 @@ git clone https://notabug.org/alimiracle/tabannusi
   cd tabannusi
 
 then type  :
+
 make
     then type "as root":
 
@@ -28,7 +29,9 @@ open the configure file as root :
 replace "yourmail"  with your email, "rp"  with your git repository, "mypath"  with your build repository path output and 1  with number of CPUS that will be used in the build
 
 then save the file
-If the code in your repository follows different build method from the standard methods( gnu build system or make or rust build system)
+
+If the code in your repository follows different build method from the standard methods
+
 Modify "/etc/tabannusi/build.sh" file according to your need.
 
 this build.sh file
@@ -63,7 +66,9 @@ tabannusi Can  do that with the help of distcc
 
 To use  this property you need
 
-1.  For each machine, 
+1:
+
+  For each machine, 
 
 download distcc
 from this link
@@ -72,20 +77,29 @@ https://codeload.github.com/distcc/distcc/tar.gz/distcc-3.1
 
 ./configure & make & sudo make install
 
-2.  On each of the servers, run distccd --daemon, with --allow options to restrict access. 
+2:
 
-3- open /etc/tabannusi/config.sh as root
+  On each of the servers, run distccd --daemon, with --allow options to restrict access. 
+
+3:
+
+ open /etc/tabannusi/config.sh as root
 
 sudo nano /etc/tabannusi/config.sh
 
 Change use_dist value to "yes"
 
-4- replace server1  with your build machines names
+4:
 
-5- save the file
+ replace server1  with your build machines names
+
+5:
+
+ save the file
 
 
 Price:
+
 tabannusi free as Price
 With One exception
 
