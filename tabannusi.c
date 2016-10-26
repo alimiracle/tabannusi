@@ -1,3 +1,18 @@
+/*
+*     This file is part of Tabannusi, a continuous build system.
+* Copyright (c) 2016 ali abdul ghani <alimiracle@riseup.net>
+*     Tabannusi is free software: you can redistribute it and/or modify
+*    it under the terms of the GNU General Public License as published by
+*    the Free Software Foundation, either version 3 of the License, or
+* (at your option)    any later version.
+*    Tabannusi is distributed in the hope that it will be useful,
+*    but WITHOUT ANY WARRANTY; without even the implied warranty of
+*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*    GNU General Public License for more details.
+*    You should have received a copy of the GNU General Public License
+*    along with Tabannusi.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include <stdio.h>
 #include <sys/types.h>
 #include <errno.h>
@@ -12,12 +27,12 @@
 #include <string.h>
 int read_pid (char *pidfile)
 {
-  FILE *f;
-  int pid;
-
+  FILE *f; /* var to read pid file */
+  int pid; /* pid var */
+/* now we will open the file */
   if (!(f=fopen(pidfile,"r")))
     return 0;
-  fscanf(f,"%d", &pid);
+  fscanf(f,"%d", &pid); /* read the file and put it in pid var */
   fclose(f);
   return pid;
 }
@@ -97,7 +112,7 @@ int write_pid (char *pidfile)
 /* function run by Demon */
 void* runcmd (void* unused)
 {
-system("bash /bin/run.sh");
+system("bash /bin/run.sh"); /* run bash file */
 return NULL; 
 }
 int run()
@@ -172,11 +187,10 @@ umask(0);
 /* make new file to save last commit */
 FILE *fp = fopen("/tmp/q.txt", "ab+");
 fclose(fp);
-write_pid("/var/run/tabannusi.pid");
+write_pid("/var/run/tabannusi.pid"); /* write pid to file */
 
 while (1)
 {
-
 /* run runcmd function in new thread */
 pthread_create (&thread_id, NULL, &runcmd, NULL);
 sleep(10);
@@ -186,7 +200,6 @@ void start()
 {
 int scann = check_pid("/var/run/tabannusi.pid");
 puts("Starting tabannusi daemon:\n");
-
 if(scann!=0)
 {
 puts("tabannusi daemon already started\n");
@@ -240,6 +253,9 @@ else if (strcmp(argv[1], "restart") == 0)
   // do something else
 restart();
 }
-
+else
+{
+usage();
+}
     return 0;
 }

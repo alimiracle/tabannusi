@@ -7,6 +7,7 @@ You need "gcc" to build tabannusi
 and you need "mutt" to send emails
 
 Install :
+
 Download the program useing git:
 
 git clone https://notabug.org/alimiracle/tabannusi
@@ -16,6 +17,7 @@ git clone https://notabug.org/alimiracle/tabannusi
 then type  :
 
 make
+
     then type "as root":
 
     sudo make install
@@ -96,7 +98,6 @@ Change use_dist value to "yes"
 5:
 
  save the file
-
 
 Price:
 
