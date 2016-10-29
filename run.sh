@@ -26,5 +26,5 @@ cp -R $repository $build_path/$log1
 cd $build_path/$log1
 /etc/tabannusi/build.sh &>$temp/$log1
 echo "this build log for "$log1_copy|mutt -a $temp/$log1 -s "build log" -- $email
-rm $log1
+rm $temp/$log1
 fi

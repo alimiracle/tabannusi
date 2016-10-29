@@ -17,4 +17,5 @@ repository="rp"
 temp="/tmp"
 use_dist="no"
 cpu_n=1
-servers='server1"
+servers='server1'
+dir=`pwd`

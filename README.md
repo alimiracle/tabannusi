@@ -8,7 +8,7 @@ and you need "mutt" to send emails
 
 Install :
 
-Download the program useing git:
+Download the program  useing git
 
 git clone https://notabug.org/alimiracle/tabannusi
 
@@ -59,6 +59,37 @@ to stop tabannusi
 type as root
 
 sudo tabannusi stop
+
+Multiple repository:
+
+If you want to use tabannusi in More than one  repository
+
+You must run more than a copy of the tabannusi
+
+For each repository, follow these instructions
+
+type
+
+chmod +x s_l.sh
+
+./s_l.sh
+
+You will see a new folder named bin
+
+move and rename this folder to  another Place (bin)
+
+then go to this folder
+
+open config.sh
+
+nano config.sh
+
+replace "yourmail"  with your email, "rp"  with your git repository, "mypath"  with your build repository path output and 1  with number of CPUS that will be used in the build
+
+then save the file
+
+then type  as root
+sudo ./tabannusi start
 
 Distributed Build:
 

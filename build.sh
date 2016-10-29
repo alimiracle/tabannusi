@@ -32,4 +32,8 @@ if echo "$list" | grep -q "configure"; then
 chmod +x configure
 ./configure
 fi
-./etc/tabannusi/make.sh
+if echo "$list" | grep -q "Makefile"; then
+/etc/tabannusi/make.sh
+exit
+fi
+echo "I Can't Find Way to build the code"
